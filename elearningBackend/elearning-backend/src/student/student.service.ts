@@ -9,15 +9,15 @@ import { Student } from './entities/student.entity';
 
 @Injectable()
 export class StudentService {
-  constructor(@InjectRepository(Student) private repo: Repository<Student> 
-    , private jwtService: JwtService, ) { }
+  // constructor(@InjectRepository(Student) private repo: Repository<Student> 
+  //   , private jwtService: JwtService, ) { }
   async create(createStudentDto: CreateStudentDto) {
 
-      const user = this.repo.create(createStudentDto);
-      await this.repo.save(user);
+      // const user = this.repo.create(createStudentDto);
+      // await this.repo.save(user);
       
-      const payload = { userId: user.id, authority: 1 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id };
+      // const payload = { userId: user.id, authority: 1 };
+      // return { access_token: this.jwtService.sign(payload), userId: user.id };
     }
   
 
@@ -26,14 +26,14 @@ export class StudentService {
   }
 
   async findOne(username: string, password:string) {
-    const user = await this.repo.findOne({where:{username:username}});
-    if(user.password==password){
-      const payload = { userId: user.id, authority: 1 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id }
-    }else{
-      throw new UnauthorizedException(ErrorSolutions.wrongPasswordOrEmailCombo, Errors.unauthenticated);
+    // const user = await this.repo.findOne({where:{username:username}});
+    // if(user.password==password){
+    //   const payload = { userId: user.id, authority: 1 };
+    //   return { access_token: this.jwtService.sign(payload), userId: user.id }
+    // }else{
+    //   throw new UnauthorizedException(ErrorSolutions.wrongPasswordOrEmailCombo, Errors.unauthenticated);
 
-    }
+    // }
   }
 
   update(id: number, updateStudentDto: UpdateStudentDto) {

@@ -3,12 +3,13 @@ import { StudentService } from './student.service';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
 
-@Controller('student')
+@Controller('/ss')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
   @Post()
   create(@Body() createStudentDto: CreateStudentDto) {
+    console.log("hit")
     return this.studentService.create(createStudentDto);
   }
 
