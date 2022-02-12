@@ -14,5 +14,10 @@ User? user;
     update;
   }
 
+  void setUser(User user1) {
+    user=user1;
+    update();
+  }
+
   
 }

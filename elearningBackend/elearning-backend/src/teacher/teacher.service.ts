@@ -17,7 +17,7 @@ export class TeacherService {
       await this.repo.save(user);
       
       const payload = { userId: user.id, authority: 2 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id ,type:2,username:createStudentDto};
+      return { access_token: this.jwtService.sign(payload), userId: user.id ,type:2,username:createStudentDto.username};
     }
   
 

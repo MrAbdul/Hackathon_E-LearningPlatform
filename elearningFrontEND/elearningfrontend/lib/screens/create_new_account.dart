@@ -1,6 +1,9 @@
 import 'dart:ui';
 
+import 'package:elearningfrontend/controllers/SignInController.dart';
 import 'package:elearningfrontend/controllers/requests_controller.dart';
+import 'package:elearningfrontend/dto/User.dart';
+import 'package:elearningfrontend/screens/wrapper.dart';
 import 'package:elearningfrontend/util/pallet.dart';
 import 'package:elearningfrontend/widgets/password_input.dart';
 import 'package:elearningfrontend/widgets/rounded_button.dart';
@@ -22,6 +25,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final RequestsController requestsController = Get.find();
+    final SignInController signInController=Get.find();
+
 
   final emailTextController = TextEditingController();
 
@@ -30,15 +35,21 @@ class _SignInState extends State<SignIn> {
   final password2TextController = TextEditingController();
 
   var isTeacher=false;
-  _login() {
+  _login() async{
     if (!isTeacher){
-    requestsController.signIn(
+    User user =await requestsController.signIn(
       
-        emailTextController.text, password2TextController.text);
+        emailTextController.text, passwordTextController.text);
+        signInController.setJwt(user.accessToken!);
+        signInController.setUser(user);
+            Get.to(Wrapper());
     }else{
-      requestsController.teacherSignIn(
+      User user =await requestsController.teacherSignIn(
       
-        emailTextController.text, password2TextController.text);
+        emailTextController.text, passwordTextController.text);
+        signInController.setJwt(user.accessToken!);
+        signInController.setUser(user);
+            Get.to(Wrapper());
     }
   }
 

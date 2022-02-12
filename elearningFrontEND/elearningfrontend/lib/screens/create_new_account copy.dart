@@ -37,6 +37,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
         emailTextController.text, password2TextController.text);
 
     signInController.setJwt(user.accessToken!);
+    signInController.setUser(user);
     Get.to(Wrapper());
     print(user.accessToken);
 
@@ -45,6 +46,7 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
       
         emailTextController.text, password2TextController.text);
             signInController.setJwt(user.accessToken!);
+            signInController.setUser(user);
             Get.to(Wrapper());
 
     }

@@ -17,9 +17,9 @@ class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(title: Text("profile"),
-    
+    actions: [TextButton(onPressed: (){signInController.logout(); 
+    Get.to(Wrapper());}, child: Text("Logout"))],
     ),
-    body: Text(signInController.jwt),floatingActionButton: FloatingActionButton(onPressed: (){signInController.logout(); 
-    Get.to(Wrapper());},), );
+    body: Text(signInController.user!.username!),);
   }
 }
