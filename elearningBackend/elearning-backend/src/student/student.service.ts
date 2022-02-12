@@ -17,7 +17,7 @@ export class StudentService {
       await this.repo.save(user);
       
       const payload = { userId: user.id, authority: 1 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id, type:1 };
+      return { access_token: this.jwtService.sign(payload), userId: user.id, type:1 ,username:createStudentDto.username};
     }
   
 
@@ -29,7 +29,7 @@ export class StudentService {
     const user = await this.repo.findOne({where:{username:username}});
     if(user.password==password){
       const payload = { userId: user.id, authority: 1 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id,type:1 }
+      return { access_token: this.jwtService.sign(payload), userId: user.id,type:1, username:username }
     }else{
       throw new UnauthorizedException(ErrorSolutions.wrongPasswordOrEmailCombo, Errors.unauthenticated);
 

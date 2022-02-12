@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:elearningfrontend/controllers/SignInController.dart';
 import 'package:elearningfrontend/controllers/requests_controller.dart';
+import 'package:elearningfrontend/dto/User.dart';
 import 'package:elearningfrontend/screens/create_new_account.dart';
+import 'package:elearningfrontend/screens/wrapper.dart';
 import 'package:elearningfrontend/util/pallet.dart';
 import 'package:elearningfrontend/widgets/password_input.dart';
 import 'package:elearningfrontend/widgets/rounded_button.dart';
@@ -20,22 +23,30 @@ class CreateNewAccount extends StatefulWidget {
 
 class _CreateNewAccountState extends State<CreateNewAccount> {
   final RequestsController requestsController = Get.find();
-
+  final SignInController signInController=Get.find();
   final emailTextController = TextEditingController();
 
   final passwordTextController = TextEditingController();
 
   final password2TextController = TextEditingController();
 
-  _signUp() {
+  _signUp() async{
     if(!isTeacher){
-    requestsController.signUp(
+   User user =await requestsController.signUp(
       
         emailTextController.text, password2TextController.text);
+
+    signInController.setJwt(user.accessToken!);
+    Get.to(Wrapper());
+    print(user.accessToken);
+
     }else{
-      requestsController.teacherSignUp(
+    User user =await   requestsController.teacherSignUp(
       
         emailTextController.text, password2TextController.text);
+            signInController.setJwt(user.accessToken!);
+            Get.to(Wrapper());
+
     }
   }
 

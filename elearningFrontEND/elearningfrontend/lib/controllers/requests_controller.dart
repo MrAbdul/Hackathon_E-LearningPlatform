@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:elearningfrontend/dto/User.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class RequestsController extends GetxController {
 
   
 
-  Future<dynamic> signUp(String username, String password) async {
+  Future<User> signUp(String username, String password) async {
     var _url = Uri.parse(Endpoints.signUpLink);
     print (_url);
     final Map body = {'username': username, 'password': password};
@@ -33,10 +34,10 @@ class RequestsController extends GetxController {
     print (response);
     print(response.body.toString());
 
-    return response;
+    return User.fromJson(jsonDecode(response.body));
   }
 
-  Future<dynamic>  signIn(String username, String password)async{
+  Future<User>  signIn(String username, String password)async{
     var _url = Uri.parse(Endpoints.signUpLink+"/"+username+"/"+password);
     var response = await _client.get(
       _url,
@@ -44,10 +45,10 @@ class RequestsController extends GetxController {
     );
     print(response.body.toString());
 
-    return response;
+    return User.fromJson(jsonDecode(response.body));
   }
 
-  Future<dynamic> teacherSignIn(String username, String password) async {
+  Future<User> teacherSignIn(String username, String password) async {
      var _url = Uri.parse(Endpoints.teachersignUpLink+"/"+username+"/"+password);
     var response = await _client.get(
       _url,
@@ -55,10 +56,10 @@ class RequestsController extends GetxController {
     );
     print(response.body.toString());
 
-    return response;
+    return User.fromJson(jsonDecode(response.body));
   }
 
-  Future<dynamic> teacherSignUp(String username, String password) async{
+  Future<User> teacherSignUp(String username, String password) async{
     var _url = Uri.parse(Endpoints.teachersignUpLink);
     print (_url);
     final Map body = {'username': username, 'password': password};
@@ -72,6 +73,6 @@ class RequestsController extends GetxController {
     print (response);
     print(response.body.toString());
 
-    return response;
+    return User.fromJson(jsonDecode(response.body));
   }
 }
