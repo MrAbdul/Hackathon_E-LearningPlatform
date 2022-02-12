@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Student } from './student/entities/student.entity';
 import { StudentModule } from './student/student.module';
+import { Teacher } from './teacher/entities/teacher.entity';
+import { TeacherModule } from './teacher/teacher.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -22,9 +24,10 @@ import { StudentModule } from './student/student.module';
       ssl:process.env.ENVIRONMENT=="dev"?false:{rejectUnauthorized:false,},
       // entities: [__dirname + '/../**/*.entity.{js,ts}']
 
-      entities:[Student]
+      entities:[Student,Teacher]
   }),
     StudentModule,
+    TeacherModule,
     ],
   controllers: [AppController],
   providers: [AppService],

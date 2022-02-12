@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:elearningfrontend/controllers/requests_controller.dart';
+import 'package:elearningfrontend/screens/create_new_account.dart';
 import 'package:elearningfrontend/util/pallet.dart';
 import 'package:elearningfrontend/widgets/password_input.dart';
 import 'package:elearningfrontend/widgets/rounded_button.dart';
@@ -8,19 +9,16 @@ import 'package:elearningfrontend/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
-
-import 'create_new_account copy.dart';
 
 
-class SignIn extends StatefulWidget {
-  SignIn({Key? key}) : super(key: key);
+class CreateNewAccount extends StatefulWidget {
+  CreateNewAccount({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<CreateNewAccount> createState() => _CreateNewAccountState();
 }
 
-class _SignInState extends State<SignIn> {
+class _CreateNewAccountState extends State<CreateNewAccount> {
   final RequestsController requestsController = Get.find();
 
   final emailTextController = TextEditingController();
@@ -29,12 +27,13 @@ class _SignInState extends State<SignIn> {
 
   final password2TextController = TextEditingController();
 
-  var isTeacher=false;
-  _login() {
-    requestsController.signIn(
+  _signUp() {
+    requestsController.signUp(
       
         emailTextController.text, password2TextController.text);
   }
+
+  var isTeacher=false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,7 @@ class _SignInState extends State<SignIn> {
                         controller: emailTextController,
                         key: widget.key,
                         icon: FontAwesomeIcons.envelope,
-                        hint: 'Username',
+                        hint: 'Email',
                         inputType: TextInputType.emailAddress,
                         inputAction: TextInputAction.next,
                       ),
@@ -70,12 +69,19 @@ class _SignInState extends State<SignIn> {
                         hint: 'Password',
                         inputAction: TextInputAction.next,
                       ),
+                      PasswordInput(
+                        controller: password2TextController,
+                        key: widget.key,
+                        icon: FontAwesomeIcons.lock,
+                        hint: 'Confirm Password',
+                        inputAction: TextInputAction.done,
+                      ),
                       SizedBox(
                         height: 25,
                       ),
                       RoundedButton(
-                        buttonName: 'Login',
-                        onPress: _login,
+                        buttonName: 'Register',
+                        onPress: _signUp,
                       ),
                       SizedBox(
                         height: 30,
@@ -84,13 +90,13 @@ class _SignInState extends State<SignIn> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Dont have an account',
+                            'Already have an account?',
                             style: kBodyText,
                           ),
                           GestureDetector(
-                            onTap: () {Get.to(CreateNewAccount());},
+                            onTap: () {Get.to(SignIn());},
                             child: Text(
-                              'Register',
+                              'Login',
                               style: kBodyText.copyWith(
                                   color: kBlue, fontWeight: FontWeight.bold),
                             ),

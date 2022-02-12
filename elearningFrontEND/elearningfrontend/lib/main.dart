@@ -1,3 +1,4 @@
+import 'package:elearningfrontend/screens/create_new_account%20copy.dart';
 import 'package:elearningfrontend/screens/create_new_account.dart';
 import 'package:elearningfrontend/util/colorResource.dart';
 import 'package:flutter/material.dart';
