@@ -31,9 +31,15 @@ class _SignInState extends State<SignIn> {
 
   var isTeacher=false;
   _login() {
+    if (!isTeacher){
     requestsController.signIn(
       
         emailTextController.text, password2TextController.text);
+    }else{
+      requestsController.teacherSignIn(
+      
+        emailTextController.text, password2TextController.text);
+    }
   }
 
   @override

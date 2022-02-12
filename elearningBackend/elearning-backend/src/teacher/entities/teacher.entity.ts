@@ -7,7 +7,7 @@ export class Teacher {
     id: string;
 
     @Column()
-    @Unique('dublicate username',['usrname'])
+    @Unique('dublicate Teacher username',['usrname'])
     username:string
     @Column()
     password: string;

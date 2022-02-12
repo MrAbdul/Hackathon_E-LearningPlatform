@@ -28,9 +28,15 @@ class _CreateNewAccountState extends State<CreateNewAccount> {
   final password2TextController = TextEditingController();
 
   _signUp() {
+    if(!isTeacher){
     requestsController.signUp(
       
         emailTextController.text, password2TextController.text);
+    }else{
+      requestsController.teacherSignUp(
+      
+        emailTextController.text, password2TextController.text);
+    }
   }
 
   var isTeacher=false;
