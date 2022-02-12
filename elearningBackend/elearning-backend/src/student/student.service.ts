@@ -1,19 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Errors, ErrorSolutions } from 'src/constants';
+import { Repository } from 'typeorm';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
+import { Student } from './entities/student.entity';
 
 @Injectable()
 export class StudentService {
-  create(createStudentDto: CreateStudentDto) {
-    return 'This action adds a new student';
-  }
+  constructor(@InjectRepository(Student) private repo: Repository<Student> 
+    , private jwtService: JwtService, ) { }
+  async create(createStudentDto: CreateStudentDto) {
+
+      const user = this.repo.create(createStudentDto);
+      await this.repo.save(user);
+      
+      const payload = { userId: user.id, authority: 1 };
+      return { access_token: this.jwtService.sign(payload), userId: user.id };
+    }
+  
 
   findAll() {
     return `This action returns all student`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} student`;
+  async findOne(username: string, password:string) {
+    const user = await this.repo.findOne({where:{username:username}});
+    if(user.password==password){
+      const payload = { userId: user.id, authority: 1 };
+      return { access_token: this.jwtService.sign(payload), userId: user.id }
+    }else{
+      throw new UnauthorizedException(ErrorSolutions.wrongPasswordOrEmailCombo, Errors.unauthenticated);
+
+    }
   }
 
   update(id: number, updateStudentDto: UpdateStudentDto) {

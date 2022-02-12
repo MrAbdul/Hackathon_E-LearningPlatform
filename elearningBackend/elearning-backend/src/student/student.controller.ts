@@ -12,14 +12,14 @@ export class StudentController {
     return this.studentService.create(createStudentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.studentService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.studentService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.studentService.findOne(+id);
+  @Get('/:username/:password')
+  findOne(@Param('username') username: string, @Param('password')password) {
+    return this.studentService.findOne(username,password);
   }
 
   @Patch(':id')

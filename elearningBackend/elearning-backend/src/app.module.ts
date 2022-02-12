@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Student } from './student/entities/student.entity';
 import { StudentModule } from './student/student.module';
 
 @Module({
@@ -21,7 +22,7 @@ import { StudentModule } from './student/student.module';
       ssl:process.env.ENVIRONMENT=="dev"?false:{rejectUnauthorized:false,},
       // entities: [__dirname + '/../**/*.entity.{js,ts}']
 
-      entities:[]
+      entities:[Student]
   }),
     StudentModule,
     ],
