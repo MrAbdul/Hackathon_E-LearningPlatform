@@ -48,7 +48,7 @@ class RequestsController extends GetxController {
   }
 
   Future<dynamic> teacherSignIn(String username, String password) async {
-     var _url = Uri.parse(Endpoints.signUpLink+"/"+username+"/"+password);
+     var _url = Uri.parse(Endpoints.teachersignUpLink+"/"+username+"/"+password);
     var response = await _client.get(
       _url,
       headers: {'Content-Type': "application/json"},
@@ -59,7 +59,7 @@ class RequestsController extends GetxController {
   }
 
   Future<dynamic> teacherSignUp(String username, String password) async{
-    var _url = Uri.parse(Endpoints.signUpLink);
+    var _url = Uri.parse(Endpoints.teachersignUpLink);
     print (_url);
     final Map body = {'username': username, 'password': password};
     print(jsonEncode(body));

@@ -1,5 +1,7 @@
+import 'package:elearningfrontend/controllers/SignInController.dart';
 import 'package:elearningfrontend/screens/create_new_account%20copy.dart';
 import 'package:elearningfrontend/screens/create_new_account.dart';
+import 'package:elearningfrontend/screens/wrapper.dart';
 import 'package:elearningfrontend/util/colorResource.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   final requestsController = Get.put(RequestsController());
+  final signInController =Get.put(SignInController());
   @override
   Widget build(BuildContext context) {
     
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
               onBackground: ColorResources.richBlack,
               onError: ColorResources.richBlack,
               brightness: Brightness.light)),
-      home: CreateNewAccount(),
+      home: Wrapper(),
     );
   }
 }

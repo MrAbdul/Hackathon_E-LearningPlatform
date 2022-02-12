@@ -17,7 +17,7 @@ export class TeacherService {
       await this.repo.save(user);
       
       const payload = { userId: user.id, authority: 2 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id };
+      return { access_token: this.jwtService.sign(payload), userId: user.id ,type:2};
     }
   
 
@@ -29,7 +29,7 @@ export class TeacherService {
     const user = await this.repo.findOne({where:{username:username}});
     if(user.password==password){
       const payload = { userId: user.id, authority: 2 };
-      return { access_token: this.jwtService.sign(payload), userId: user.id }
+      return { access_token: this.jwtService.sign(payload), userId: user.id ,type:2}
     }else{
       throw new UnauthorizedException(ErrorSolutions.wrongPasswordOrEmailCombo, Errors.unauthenticated);
 
